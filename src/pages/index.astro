@@ -83,6 +83,8 @@ const { Content } = await render(about);
             <a href="/games" class="callout__button">Browse All Games</a>
         </div>
     </section>
+
+    <div class="avatar-scroll-zone"></div>
 </Layout>
 
 <style is:global>
@@ -241,6 +243,11 @@ const { Content } = await render(about);
         opacity: 0.85;
     }
 
+    .avatar-scroll-zone {
+        height: 150vh;
+        position: relative;
+    }
+
     .games {
         padding: 2rem 0;
     }
@@ -361,32 +368,76 @@ const { Content } = await render(about);
     function initAvatarSticky() {
         const avatar = document.querySelector(".about__avatar");
         const aboutSection = document.querySelector(".about");
+        const scrollZone = document.querySelector(".avatar-scroll-zone");
 
         if (!avatar || !aboutSection) return;
 
         const placeholder = document.createElement("div");
+        let initialRect = null;
 
         function onScroll() {
-            const rect = aboutSection.getBoundingClientRect();
-            if (rect.bottom < window.innerHeight) {
-                if (!avatar.classList.contains("about__avatar--fixed")) {
-                    const avatarRect = avatar.getBoundingClientRect();
-                    placeholder.style.width = avatarRect.width + "px";
-                    placeholder.style.height = avatarRect.height + "px";
-                    placeholder.style.order = "2";
-                    placeholder.style.flexShrink = "0";
-                    avatar.parentNode.insertBefore(placeholder, avatar);
-                    avatar.style.top = avatarRect.top + "px";
-                    avatar.style.left = avatarRect.left + "px";
-                    avatar.classList.add("about__avatar--fixed");
-                }
-            } else {
+            const aboutRect = aboutSection.getBoundingClientRect();
+
+            // About section still visible - normal flow
+            if (aboutRect.bottom >= window.innerHeight) {
                 if (avatar.classList.contains("about__avatar--fixed")) {
                     avatar.classList.remove("about__avatar--fixed");
                     avatar.style.top = "";
                     avatar.style.left = "";
+                    avatar.style.transform = "";
                     placeholder.remove();
+                    initialRect = null;
                 }
+                return;
+            }
+
+            // Fix avatar when about section scrolls past
+            if (!avatar.classList.contains("about__avatar--fixed")) {
+                const avatarRect = avatar.getBoundingClientRect();
+                initialRect = {
+                    top: avatarRect.top,
+                    left: avatarRect.left,
+                    width: avatarRect.width,
+                    height: avatarRect.height,
+                };
+                placeholder.style.width = avatarRect.width + "px";
+                placeholder.style.height = avatarRect.height + "px";
+                placeholder.style.order = "2";
+                placeholder.style.flexShrink = "0";
+                avatar.parentNode.insertBefore(placeholder, avatar);
+                avatar.style.top = avatarRect.top + "px";
+                avatar.style.left = avatarRect.left + "px";
+                avatar.classList.add("about__avatar--fixed");
+            }
+
+            // Scroll zone animation: slide to center and zoom
+            if (scrollZone && initialRect) {
+                const zoneRect = scrollZone.getBoundingClientRect();
+                const totalTravel = zoneRect.height + window.innerHeight;
+                const traveled = window.innerHeight - zoneRect.top;
+                const progress = Math.min(
+                    Math.max(traveled / totalTravel, 0),
+                    1,
+                );
+
+                const targetLeft = (window.innerWidth - initialRect.width) / 2;
+                const targetTop = 0;
+                const targetScale = Math.max(
+                    window.innerWidth / initialRect.width,
+                    2.5,
+                );
+
+                const currentLeft =
+                    initialRect.left +
+                    (targetLeft - initialRect.left) * progress;
+                const currentTop =
+                    initialRect.top + (targetTop - initialRect.top) * progress;
+                const currentScale = 1 + (targetScale - 1) * progress;
+
+                avatar.style.left = currentLeft + "px";
+                avatar.style.top = currentTop + "px";
+                avatar.style.transform = `scale(${currentScale})`;
+                avatar.style.transformOrigin = "top center";
             }
         }
 
