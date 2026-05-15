@@ -1,9 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
 
-const steps = await getCollection("tutorial");
-steps.sort((a, b) => a.data.step - b.data.step);
+const tutorial = await getEntry("tutorial", "steps");
+const steps = tutorial.data.steps;
 ---
 
 <Layout title="Download Tutorial | Stefano Gaming">
@@ -12,18 +12,18 @@ steps.sort((a, b) => a.data.step - b.data.step);
 
         <div class="steps-list">
             {
-                steps.map(({ data }) => (
+                steps.map((step) => (
                     <div class="step-card">
                         <div class="step-header">
-                            <span class="step-badge">{data.step}</span>
+                            <span class="step-badge">{step.step}</span>
                             <h2 class="step-title">
-                                Step {data.step} &mdash; {data.title}
+                                Step {step.step} &mdash; {step.title}
                             </h2>
                         </div>
                         <div class="step-image-wrapper">
                             <img
-                                src={data.image}
-                                alt={`Step ${data.step}: ${data.title}`}
+                                src={step.image}
+                                alt={`Step ${step.step}: ${step.title}`}
                                 class="step-image"
                                 loading="lazy"
                             />

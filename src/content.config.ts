@@ -18,9 +18,13 @@ const games = defineCollection({
 const tutorial = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/data/tutorial" }),
   schema: z.object({
-    step: z.number(),
-    title: z.string(),
-    image: z.string(),
+    steps: z.array(
+      z.object({
+        step: z.number(),
+        title: z.string(),
+        image: z.string(),
+      }),
+    ),
   }),
 });
 
