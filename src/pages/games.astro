@@ -1,5 +1,227 @@
 ---
 import Layout from "../layouts/Layout.astro";
+
+const downloadableGames = [
+    {
+        title: "Miami's Deadline",
+        image: "/images/games/miamis-deadline.png",
+        url: "https://drive.google.com/file/d/1UiFhlH0ri-hOagqCXXp5meGh8ZNbMQti/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "CyberScape",
+        image: "/images/games/cyberscape.png",
+        url: "https://drive.google.com/file/d/11_vqLNkq-aVAyq6faA3efIeUkj2yBF_n/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Typed to death",
+        image: "/images/games/typed-to-death.png",
+        url: "https://drive.google.com/file/d/1oJX_Z_2yMUPysaR4diGEie4irHgJ5Dle/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Project Pixel",
+        image: "/images/games/project-pixel.png",
+        url: "https://drive.google.com/file/d/1RIV2WuxNI6fuUBPMKpCuZoLRN92nINEX/view?usp=share_link",
+        type: "download",
+    },
+    {
+        title: "Sigil Showdown",
+        image: "/images/games/sigil-showdown.png",
+        url: "https://drive.google.com/file/d/1hP-XYTLlSF5S4kYeMxNHMHNFfglFx-Bf/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Draw",
+        image: "/images/games/draw.png",
+        url: "https://drive.google.com/file/d/1XMJmS-VXXikjCAq38VcDxVzLde0CiQqX/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Grief",
+        image: "/images/games/grief.png",
+        url: "https://stefano-gaming.itch.io/grief",
+        type: "itch",
+    },
+    {
+        title: "Sounds From Silence",
+        image: "/images/games/sounds-from-silence.png",
+        url: "https://stefano-gaming.itch.io/sounds-from-silence",
+        type: "itch",
+    },
+    {
+        title: "Solitary Sonata",
+        image: "/images/games/solitary-sonata.png",
+        url: "https://stefano-gaming.itch.io/solitary-sonata",
+        type: "itch",
+    },
+    {
+        title: "Inverted (Remastered)",
+        image: "/images/games/inverted-remastered.png",
+        url: "https://drive.google.com/file/d/1J49NkgcNUL9Xa_VuLx11ydfxdgf1QFl5/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Pixel Party",
+        image: "/images/games/pixel-party.png",
+        url: "https://drive.google.com/file/d/18r6obhepIw_znqLMkUL6iPslov_8TAwS/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Survival of the Fittest",
+        image: "/images/games/survival-of-the-fittest.png",
+        url: "https://drive.google.com/file/d/1ogQJlzagftY9nyw1bjvDNT3ab29g-4TT/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Balls",
+        image: "/images/games/balls.png",
+        url: "https://drive.google.com/file/d/1ub53YVg9dPqa8SmcniKH_dTF0wvckw0-/view?usp=share_link",
+        type: "download",
+    },
+    {
+        title: "WACC Horror Game",
+        image: "/images/games/wacc-horror-game.png",
+        url: "https://drive.google.com/file/d/1QFSaP0yu9OomHN1IwuTSjBsI1W6mxk0h/view?usp=share_link",
+        type: "download",
+    },
+    {
+        title: "Someone's In The Shadows",
+        image: "/images/games/someones-in-the-shadows.png",
+        url: "https://stefano-gaming.itch.io/someones-in-the-shadows",
+        type: "itch",
+    },
+    {
+        title: "Acceptance",
+        image: "/images/games/acceptance.png",
+        url: "https://stefano-gaming.itch.io/acceptance",
+        type: "itch",
+    },
+    {
+        title: "Speak With Screams",
+        image: "/images/games/speak-with-screams.png",
+        url: "https://stefano-gaming.itch.io/speak-with-screams",
+        type: "itch",
+    },
+    {
+        title: "Tales From Dreadlight: The Morgue",
+        image: "/images/games/tales-from-dreadlight-the-morgue.png",
+        url: "https://stefano-gaming.itch.io/tales-from-dreadlight-the-morgue",
+        type: "itch",
+    },
+    {
+        title: "Dungeon Knight Demo",
+        image: "/images/games/dungeon-knight-demo.png",
+        url: "https://drive.google.com/file/d/1KvVFOWcxLryX6Y16BvGNcxNjcdwE0JZc/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Pixel Surgeon",
+        image: "/images/games/pixel-surgeon.png",
+        url: "https://drive.google.com/file/d/1LL1bBh31CVpIIXUHXqvXQcW6UKyAC2mZ/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Defend The Fort",
+        image: "/images/games/defend-the-fort.png",
+        url: "https://drive.google.com/file/d/1P3KscLzUNs643MgpWcddO9j81HT76a5a/view?usp=sharing",
+        type: "download",
+    },
+    {
+        title: "Space Survival",
+        image: "/images/games/space-survival.png",
+        url: "https://drive.google.com/file/d/1Nf4Eqyz87XO0c51MQeCJ-urAAULXwWSU/view?usp=share_link",
+        type: "download",
+    },
+    {
+        title: "Factory Reset (Early in Development)",
+        image: "/images/games/factory-reset.png",
+        url: "https://drive.google.com/file/d/1f4t2y5ppcYVcIgVyP9OitBCR6B-_QBSb/view?usp=share_link",
+        type: "download",
+    },
+    {
+        title: "See Through Static",
+        image: "/images/games/see-through-static.png",
+        url: "https://stefano-gaming.itch.io/see-through-static",
+        type: "itch",
+    },
+    {
+        title: "Pale Woods",
+        image: "/images/games/pale-woods.png",
+        url: "https://stefano-gaming.itch.io/pale-woods",
+        type: "itch",
+    },
+    {
+        title: "Kitty Combat",
+        image: "/images/games/kitty-combat.png",
+        url: "https://stefano-gaming.itch.io/kitty-combat",
+        type: "itch",
+    },
+];
+
+const browserGames = [
+    {
+        title: "Miami's Deadline (Website Version)",
+        url: "https://liluo.io/instant-builds/70ac898b-be32-4aaa-bab3-0a0eb5b70b69",
+    },
+    {
+        title: "Dungeon Knight Demo (Website Version)",
+        url: "https://liluo.io/instant-builds/4ebf5302-d97d-4451-aebe-aa05edb9062e",
+    },
+    {
+        title: "Survival of the Fittest (Website Version)",
+        url: "https://liluo.io/instant-builds/d8648124-c87c-4963-bb59-f269724fe91e",
+    },
+    {
+        title: "CyberScape (Website Version)",
+        url: "https://liluo.io/instant-builds/ef5515b5-cc32-4f1e-8b64-422849816280",
+    },
+    {
+        title: "Pixel Party: Game Jam Version",
+        url: "https://liluo.io/stefano_gaming/pixel-party",
+    },
+    {
+        title: "A Better Place (Website Game)",
+        url: "https://games.gdevelop-app.com/game-ec64e84f-9a26-4194-ba1d-ac29d490a4d7/index.html",
+    },
+    {
+        title: "Deadzone (Website Game)",
+        url: "https://games.gdevelop-app.com/game-d6049b6b-a7b5-497b-b17d-21001b0d7875/index.html",
+    },
+    {
+        title: "Typed to death (Website Game)",
+        url: "https://liluo.io/stefano_gaming/typed-to-death",
+    },
+    {
+        title: "Backslash (Still in testing)",
+        url: "https://liluo.io/instant-builds/343a0a2a-4bba-471b-aa8e-50d41d6c3958",
+    },
+    {
+        title: "Balls (Website Version)",
+        url: "https://liluo.io/instant-builds/f5b34eba-9d84-4707-ae8c-0d61b88e8f26",
+    },
+    {
+        title: "Project Pixel (Website Version)",
+        url: "https://gd.games/instant-builds/be112030-78fe-4f8c-9496-706a2a3e0790",
+    },
+    {
+        title: "Space Survival (Website Version)",
+        url: "https://liluo.io/instant-builds/34bbd368-3b58-4ab5-bf46-70d8fe822fcf",
+    },
+    {
+        title: "WACC Horror Game (Website Version)",
+        url: "https://gd.games/stefano_gaming/wacc-horror-game",
+    },
+    {
+        title: "Draw: A Western Dueling Game (Website Version)",
+        url: "https://gd.games/instant-builds/7bf1949f-a68b-4e19-a322-5bdc587a8e81",
+    },
+    {
+        title: "Sigil Showdown (Website Version)",
+        url: "https://gd.games/instant-builds/e0b51db9-8176-439a-b7d8-55465b46cbfa",
+    },
+];
 ---
 
 <Layout title="Games - Stefano Gaming">
@@ -10,256 +232,59 @@ import Layout from "../layouts/Layout.astro";
         <section class="section">
             <h2 class="section-title">Downloadable Games</h2>
             <div class="games-grid">
-                <!-- Column 1 -->
-                <div class="games-column">
-                    <div class="game-card">
-                        <h3 class="game-title">Miami's Deadline</h3>
-                        <a href="https://drive.google.com/file/d/1UiFhlH0ri-hOagqCXXp5meGh8ZNbMQti/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">CyberScape</h3>
-                        <a href="https://drive.google.com/file/d/11_vqLNkq-aVAyq6faA3efIeUkj2yBF_n/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Typed to death</h3>
-                        <a href="https://drive.google.com/file/d/1oJX_Z_2yMUPysaR4diGEie4irHgJ5Dle/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Project Pixel</h3>
-                        <a href="https://drive.google.com/file/d/1RIV2WuxNI6fuUBPMKpCuZoLRN92nINEX/view?usp=share_link" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Sigil Showdown</h3>
-                        <a href="https://drive.google.com/file/d/1hP-XYTLlSF5S4kYeMxNHMHNFfglFx-Bf/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Draw</h3>
-                        <a href="https://drive.google.com/file/d/1XMJmS-VXXikjCAq38VcDxVzLde0CiQqX/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Grief</h3>
-                        <a href="https://stefano-gaming.itch.io/grief" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Sounds From Silence</h3>
-                        <a href="https://stefano-gaming.itch.io/sounds-from-silence" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Solitary Sonata</h3>
-                        <a href="https://stefano-gaming.itch.io/solitary-sonata" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Column 2 -->
-                <div class="games-column">
-                    <div class="game-card">
-                        <h3 class="game-title">Inverted (Remastered)</h3>
-                        <a href="https://drive.google.com/file/d/1J49NkgcNUL9Xa_VuLx11ydfxdgf1QFl5/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Pixel Party</h3>
-                        <a href="https://drive.google.com/file/d/18r6obhepIw_znqLMkUL6iPslov_8TAwS/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Survival of the Fittest</h3>
-                        <a href="https://drive.google.com/file/d/1ogQJlzagftY9nyw1bjvDNT3ab29g-4TT/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Balls</h3>
-                        <a href="https://drive.google.com/file/d/1ub53YVg9dPqa8SmcniKH_dTF0wvckw0-/view?usp=share_link" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">WACC Horror Game</h3>
-                        <a href="https://drive.google.com/file/d/1QFSaP0yu9OomHN1IwuTSjBsI1W6mxk0h/view?usp=share_link" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Someone's In The Shadows</h3>
-                        <a href="https://stefano-gaming.itch.io/someones-in-the-shadows" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Acceptance</h3>
-                        <a href="https://stefano-gaming.itch.io/acceptance" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Speak With Screams</h3>
-                        <a href="https://stefano-gaming.itch.io/speak-with-screams" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Tales From Dreadlight: The Morgue</h3>
-                        <a href="https://stefano-gaming.itch.io/tales-from-dreadlight-the-morgue" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Column 3 -->
-                <div class="games-column">
-                    <div class="game-card">
-                        <h3 class="game-title">Dungeon Knight Demo</h3>
-                        <a href="https://drive.google.com/file/d/1KvVFOWcxLryX6Y16BvGNcxNjcdwE0JZc/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Pixel Surgeon</h3>
-                        <a href="https://drive.google.com/file/d/1LL1bBh31CVpIIXUHXqvXQcW6UKyAC2mZ/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Defend The Fort</h3>
-                        <a href="https://drive.google.com/file/d/1P3KscLzUNs643MgpWcddO9j81HT76a5a/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Space Survival</h3>
-                        <a href="https://drive.google.com/file/d/1Nf4Eqyz87XO0c51MQeCJ-urAAULXwWSU/view?usp=share_link" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Factory Reset <span class="game-note">(Early in Development)</span></h3>
-                        <a href="https://drive.google.com/file/d/1f4t2y5ppcYVcIgVyP9OitBCR6B-_QBSb/view?usp=share_link" target="_blank" rel="noopener noreferrer" class="game-link drive-link">
-                            Download →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">See Through Static</h3>
-                        <a href="https://stefano-gaming.itch.io/see-through-static" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Pale Woods</h3>
-                        <a href="https://stefano-gaming.itch.io/pale-woods" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                    <div class="game-card">
-                        <h3 class="game-title">Kitty Combat</h3>
-                        <a href="https://stefano-gaming.itch.io/kitty-combat" target="_blank" rel="noopener noreferrer" class="game-link itch-link">
-                            Play on itch.io →
-                        </a>
-                    </div>
-                </div>
+                {
+                    downloadableGames.map((game) => (
+                        <article class="game-card">
+                            <div class="card-image-wrapper">
+                                <img
+                                    src={game.image}
+                                    alt={game.title}
+                                    class="card-image"
+                                    loading="lazy"
+                                />
+                            </div>
+                            <div class="card-content">
+                                <h3 class="card-title">{game.title}</h3>
+                                <a
+                                    href={game.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="card-button"
+                                >
+                                    {game.type === "itch"
+                                        ? "Play on itch.io →"
+                                        : "Download →"}
+                                </a>
+                            </div>
+                        </article>
+                    ))
+                }
             </div>
         </section>
 
-        <!-- Section 2: Browser Games -->
+        <!-- Section 2: Old Website Games/Versions -->
         <section class="section">
             <h2 class="section-title">Old Website Games/Versions</h2>
-            <p class="section-subtitle">(These can be played in your browser without any downloads, at the cost of quality)</p>
+            <p class="section-subtitle">
+                (These can be played in your browser without any downloads, at
+                the cost of quality)
+            </p>
             <ul class="browser-games-list">
-                <li>
-                    <a href="https://liluo.io/instant-builds/70ac898b-be32-4aaa-bab3-0a0eb5b70b69" target="_blank" rel="noopener noreferrer">
-                        Miami's Deadline (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://liluo.io/instant-builds/4ebf5302-d97d-4451-aebe-aa05edb9062e" target="_blank" rel="noopener noreferrer">
-                        Dungeon Knight Demo (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://liluo.io/instant-builds/d8648124-c87c-4963-bb59-f269724fe91e" target="_blank" rel="noopener noreferrer">
-                        Survival of the Fittest (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://liluo.io/instant-builds/ef5515b5-cc32-4f1e-8b64-422849816280" target="_blank" rel="noopener noreferrer">
-                        CyberScape (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://liluo.io/stefano_gaming/pixel-party" target="_blank" rel="noopener noreferrer">
-                        Pixel Party: Game Jam Version (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://games.gdevelop-app.com/game-ec64e84f-9a26-4194-ba1d-ac29d490a4d7/index.html" target="_blank" rel="noopener noreferrer">
-                        A Better Place (Website Game)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://games.gdevelop-app.com/game-d6049b6b-a7b5-497b-b17d-21001b0d7875/index.html" target="_blank" rel="noopener noreferrer">
-                        Deadzone (Website Game)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://liluo.io/stefano_gaming/typed-to-death" target="_blank" rel="noopener noreferrer">
-                        Typed to death (Website Game)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://liluo.io/instant-builds/343a0a2a-4bba-471b-aa8e-50d41d6c3958" target="_blank" rel="noopener noreferrer">
-                        Backslash (Still in testing and under work)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://liluo.io/instant-builds/f5b34eba-9d84-4707-ae8c-0d61b88e8f26" target="_blank" rel="noopener noreferrer">
-                        Balls (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://gd.games/instant-builds/be112030-78fe-4f8c-9496-706a2a3e0790" target="_blank" rel="noopener noreferrer">
-                        Project Pixel (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://liluo.io/instant-builds/34bbd368-3b58-4ab5-bf46-70d8fe822fcf" target="_blank" rel="noopener noreferrer">
-                        Space Survival (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://gd.games/stefano_gaming/wacc-horror-game" target="_blank" rel="noopener noreferrer">
-                        WACC Horror Game (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://gd.games/instant-builds/7bf1949f-a68b-4e19-a322-5bdc587a8e81" target="_blank" rel="noopener noreferrer">
-                        Draw: A Western Dueling Game (Website Version)
-                    </a>
-                </li>
-                <li>
-                    <a href="https://gd.games/instant-builds/e0b51db9-8176-439a-b7d8-55465b46cbfa" target="_blank" rel="noopener noreferrer">
-                        Sigil Showdown (Website Version)
-                    </a>
-                </li>
+                {
+                    browserGames.map((game, index) => (
+                        <li class="browser-game-item">
+                            <span class="game-number">{index + 1}.</span>
+                            <a
+                                href={game.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="browser-game-link"
+                            >
+                                {game.title}
+                            </a>
+                        </li>
+                    ))
+                }
             </ul>
         </section>
     </div>
@@ -267,184 +292,188 @@ import Layout from "../layouts/Layout.astro";
 
 <style>
     .games-page {
-        display: flex;
-        flex-direction: column;
-        gap: 3rem;
+        --bg: #000000;
+        --card-bg: #0a0a0a;
+        --text: #ffffff;
+        --muted: #818181;
+        --primary: #3374ff;
+        --border: #222222;
     }
 
     .page-title {
         font-size: 2.5rem;
         font-weight: 700;
-        color: #e0e0e0;
+        color: var(--text);
+        margin-bottom: 2rem;
         text-align: center;
-        margin-bottom: 0.5rem;
     }
 
     .section {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
+        margin-bottom: 4rem;
     }
 
     .section-title {
         font-size: 1.75rem;
         font-weight: 600;
-        color: #e0e0e0;
-        border-bottom: 2px solid #7c5cfc;
-        padding-bottom: 0.5rem;
+        color: var(--text);
+        margin-bottom: 0.75rem;
     }
 
     .section-subtitle {
-        color: #888;
+        color: var(--muted);
         font-size: 0.95rem;
-        margin-top: -0.75rem;
-        font-style: italic;
+        margin-bottom: 1.5rem;
     }
 
-    /* Games Grid - 3 Column Layout */
+    /* ── Games Grid ── */
     .games-grid {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
         gap: 1.5rem;
-        align-items: flex-start;
     }
 
-    .games-column {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        min-width: 0;
+    @media (max-width: 1024px) {
+        .games-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
     }
 
-    /* Game Card */
+    @media (max-width: 640px) {
+        .games-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* ── Game Card ── */
     .game-card {
-        background-color: #1a1a1a;
-        border: 1px solid #2a2a2a;
-        border-radius: 8px;
-        padding: 1.25rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.75rem;
-        transition: border-color 0.2s ease, transform 0.2s ease;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow: hidden;
+        transition:
+            transform 0.3s ease,
+            box-shadow 0.3s ease,
+            border-color 0.3s ease;
     }
 
     .game-card:hover {
-        border-color: #7c5cfc;
-        transform: translateY(-2px);
+        transform: translateY(-6px);
+        box-shadow: 0 12px 32px rgba(51, 116, 255, 0.15);
+        border-color: var(--primary);
     }
 
-    .game-title {
-        font-size: 1.1rem;
+    .card-image-wrapper {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s ease;
+    }
+
+    .game-card:hover .card-image {
+        transform: scale(1.05);
+    }
+
+    .card-content {
+        padding: 1rem 1.25rem 1.25rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .card-title {
+        font-size: 1rem;
         font-weight: 600;
-        color: #e0e0e0;
-        line-height: 1.3;
+        color: var(--text);
+        line-height: 1.4;
     }
 
-    .game-note {
-        font-size: 0.85rem;
-        color: #888;
-        font-weight: 400;
-    }
-
-    .game-link {
+    .card-button {
         display: inline-block;
         padding: 0.5rem 1rem;
+        background-color: var(--primary);
+        color: #fff;
+        font-size: 0.875rem;
+        font-weight: 600;
         border-radius: 6px;
-        font-size: 0.9rem;
-        font-weight: 500;
         text-decoration: none;
         text-align: center;
-        transition: background-color 0.2s ease, color 0.2s ease;
-        cursor: pointer;
+        transition:
+            background-color 0.2s ease,
+            transform 0.2s ease;
     }
 
-    .drive-link {
-        background-color: #7c5cfc;
+    .card-button:hover {
+        background-color: #5a8fff;
         color: #fff;
+        transform: scale(1.03);
     }
 
-    .drive-link:hover {
-        background-color: #9b82fc;
-        color: #fff;
+    .card-button:active {
+        transform: scale(0.98);
     }
 
-    .itch-link {
-        background-color: transparent;
-        color: #7c5cfc;
-        border: 1px solid #7c5cfc;
-    }
-
-    .itch-link:hover {
-        background-color: #7c5cfc;
-        color: #fff;
-    }
-
-    /* Browser Games List */
+    /* ── Browser Games List ── */
     .browser-games-list {
         list-style: none;
         padding: 0;
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.6rem;
     }
 
-    .browser-games-list li {
-        background-color: #1a1a1a;
-        border: 1px solid #2a2a2a;
+    .browser-game-item {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
         border-radius: 6px;
-        padding: 0.75rem 1rem;
-        transition: border-color 0.2s ease;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border);
+        transition:
+            border-color 0.2s ease,
+            background-color 0.2s ease;
     }
 
-    .browser-games-list li:hover {
-        border-color: #7c5cfc;
+    .browser-game-item:hover {
+        border-color: var(--primary);
+        background-color: #0f0f0f;
     }
 
-    .browser-games-list a {
-        color: #e0e0e0;
+    .game-number {
+        color: var(--muted);
+        font-size: 0.9rem;
+        font-weight: 600;
+        min-width: 1.75rem;
+        flex-shrink: 0;
+    }
+
+    .browser-game-link {
+        color: var(--primary);
+        font-size: 0.95rem;
         text-decoration: none;
-        font-size: 1rem;
-        display: block;
         transition: color 0.2s ease;
     }
 
-    .browser-games-list a:hover {
-        color: #7c5cfc;
+    .browser-game-link:hover {
+        color: #5a8fff;
+        text-decoration: underline;
     }
 
-    /* Responsive: Tablet (2 columns) */
-    @media (max-width: 900px) {
-        .games-grid {
-            flex-wrap: wrap;
-        }
-
-        .games-column {
-            flex: 1 1 calc(50% - 0.75rem);
-            min-width: calc(50% - 0.75rem);
-        }
-    }
-
-    /* Responsive: Mobile (1 column) */
-    @media (max-width: 600px) {
+    /* ── Responsive Page Title ── */
+    @media (max-width: 640px) {
         .page-title {
             font-size: 2rem;
         }
 
         .section-title {
             font-size: 1.4rem;
-        }
-
-        .games-grid {
-            flex-direction: column;
-        }
-
-        .games-column {
-            flex: 1 1 100%;
-            min-width: 100%;
-        }
-
-        .game-card {
-            padding: 1rem;
         }
     }
 </style>

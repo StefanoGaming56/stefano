@@ -1,132 +1,178 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const games = [
-    {
-        title: "Tales From Dreadlight: The Morgue",
-        youtube: "https://www.youtube.com/embed/uwpV97Vf8S0",
-        itchio: "https://stefano-gaming.itch.io/tales-from-dreadlight-the-morgue",
-    },
-    {
-        title: "Speak With Screams",
-        youtube: "https://www.youtube.com/embed/lJlCHp-Ql00",
-        itchio: "https://stefano-gaming.itch.io/speak-with-screams",
-    },
-    {
-        title: "Acceptance",
-        youtube: "https://www.youtube.com/embed/I1A3MlH_v3U",
-        itchio: "https://stefano-gaming.itch.io/acceptance",
-    },
-];
 ---
 
-<Layout title="Stefano Gaming - Home">
+<Layout title="Stefano Gaming">
     <section class="hero">
-        <h1>Stefano Gaming</h1>
-        <p class="subtitle">Indie Game Developer</p>
+        <img
+            src="/images/name-banner.png"
+            alt="Stefano Gaming"
+            class="hero__banner"
+        />
     </section>
 
-    <section class="featured">
-        <h2>Featured Games</h2>
-        <div class="game-grid">
-            {
-                games.map((game) => (
-                    <article class="game-card">
-                        <h3 class="game-title">{game.title}</h3>
-                        <div class="video-wrapper">
-                            <iframe
-                                src={game.youtube}
-                                title={`${game.title} trailer`}
-                                frameborder="0"
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                allowfullscreen
-                            />
-                        </div>
-                        <a
-                            href={game.itchio}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="itchio-link"
-                        >
-                            Play on itch.io →
-                        </a>
-                    </article>
-                ))
-            }
+    <section class="games">
+        <div class="games__grid">
+            <article class="card">
+                <img
+                    src="/images/games/tales-from-dreadlight-the-morgue.png"
+                    alt="Tales From Dreadlight: The Morgue"
+                    class="card__image"
+                />
+                <h2 class="card__title">Tales From Dreadlight: The Morgue</h2>
+                <div class="card__video">
+                    <iframe
+                        src="https://www.youtube.com/embed/uwpV97Vf8S0"
+                        title="Tales From Dreadlight: The Morgue Trailer"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+                <a
+                    href="https://stefano-gaming.itch.io/tales-from-dreadlight-the-morgue"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="card__link"
+                >
+                    Play on itch.io
+                </a>
+            </article>
+
+            <article class="card">
+                <img
+                    src="/images/games/speak-with-screams.png"
+                    alt="Speak With Screams"
+                    class="card__image"
+                />
+                <h2 class="card__title">Speak With Screams</h2>
+                <div class="card__video">
+                    <iframe
+                        src="https://www.youtube.com/embed/lJlCHp-Ql00"
+                        title="Speak With Screams Trailer"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+                <a
+                    href="https://stefano-gaming.itch.io/speak-with-screams"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="card__link"
+                >
+                    Play on itch.io
+                </a>
+            </article>
+
+            <article class="card">
+                <img
+                    src="/images/games/acceptance.png"
+                    alt="Acceptance"
+                    class="card__image"
+                />
+                <h2 class="card__title">Acceptance</h2>
+                <div class="card__video">
+                    <iframe
+                        src="https://www.youtube.com/embed/I1A3MlH_v3U"
+                        title="Acceptance Trailer"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                </div>
+                <a
+                    href="https://stefano-gaming.itch.io/acceptance"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="card__link"
+                >
+                    Play on itch.io
+                </a>
+            </article>
         </div>
     </section>
 </Layout>
 
 <style>
+    :root {
+        --bg: #000000;
+        --card-bg: #0a0a0a;
+        --text: #ffffff;
+        --muted: #818181;
+        --primary: #3374ff;
+        --border: #222222;
+    }
+
     .hero {
-        text-align: center;
-        padding: 2rem 0 3rem;
-    }
-
-    .hero h1 {
-        font-size: 2.5rem;
-        font-weight: 800;
-        color: var(--color-primary);
-        margin-bottom: 0.5rem;
-        letter-spacing: -0.02em;
-    }
-
-    .subtitle {
-        font-size: 1.2rem;
-        color: var(--color-text-muted);
-    }
-
-    .featured {
-        margin-top: 1rem;
-    }
-
-    .featured h2 {
-        font-size: 1.75rem;
-        font-weight: 700;
-        margin-bottom: 2rem;
-        color: var(--color-text);
-    }
-
-    .game-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 2rem;
-    }
-
-    .game-card {
-        background-color: var(--color-surface);
-        border: 1px solid var(--color-border);
-        border-radius: 12px;
-        padding: 1.5rem;
         display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        transition:
-            transform 0.2s ease,
-            border-color 0.2s ease;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem 1rem;
     }
 
-    .game-card:hover {
-        transform: translateY(-4px);
-        border-color: var(--color-primary);
+    .hero__banner {
+        max-width: 100%;
+        height: auto;
     }
 
-    .game-title {
-        font-size: 1.15rem;
-        font-weight: 600;
-        color: var(--color-text);
+    .games {
+        padding: 2rem 1rem;
     }
 
-    .video-wrapper {
-        position: relative;
-        width: 100%;
-        padding-bottom: 56.25%;
+    .games__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+        .games__grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .games__grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .card {
+        background-color: var(--card-bg);
+        border: 1px solid var(--border);
         border-radius: 8px;
         overflow: hidden;
-        background-color: #000;
+        display: flex;
+        flex-direction: column;
+        transition: border-color 0.2s ease;
     }
 
-    .video-wrapper iframe {
+    .card:hover {
+        border-color: var(--primary);
+    }
+
+    .card__image {
+        width: 100%;
+        max-height: 200px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .card__title {
+        color: var(--text);
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 1rem 1rem 0.75rem;
+    }
+
+    .card__video {
+        position: relative;
+        width: 100%;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        margin: 0 0 1rem;
+    }
+
+    .card__video iframe {
         position: absolute;
         top: 0;
         left: 0;
@@ -135,31 +181,20 @@ const games = [
         border: none;
     }
 
-    .itchio-link {
+    .card__link {
         display: inline-block;
-        text-align: center;
-        padding: 0.65rem 1.25rem;
-        background-color: var(--color-primary);
-        color: #fff;
-        font-weight: 600;
-        font-size: 0.95rem;
-        border-radius: 8px;
-        transition: background-color 0.2s ease;
+        margin: 0 1rem 1rem;
+        padding: 0.6rem 1.2rem;
+        background-color: var(--primary);
+        color: var(--text);
         text-decoration: none;
+        border-radius: 4px;
+        font-weight: 500;
+        text-align: center;
+        transition: opacity 0.2s ease;
     }
 
-    .itchio-link:hover {
-        background-color: var(--color-primary-hover);
-        color: #fff;
-    }
-
-    @media (max-width: 768px) {
-        .game-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .hero h1 {
-            font-size: 2rem;
-        }
+    .card__link:hover {
+        opacity: 0.85;
     }
 </style>

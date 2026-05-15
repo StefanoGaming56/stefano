@@ -1,190 +1,250 @@
 ---
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+
+const steps = [
+    {
+        step: 1,
+        title: "Go to the Games page and click a download link",
+        image: "/images/tutorial/step1.png",
+    },
+    {
+        step: 2,
+        title: "You will be taken to Google Drive",
+        image: "/images/tutorial/step2.png",
+    },
+    {
+        step: 3,
+        title: "Click the download button on the Google Drive page",
+        image: "/images/tutorial/step3.png",
+    },
+    {
+        step: 4,
+        title: "Confirm the download if prompted",
+        image: "/images/tutorial/step4.png",
+    },
+    {
+        step: 5,
+        title: "Wait for the download to complete",
+        image: "/images/tutorial/step5.png",
+    },
+    {
+        step: 6,
+        title: "Locate the downloaded ZIP file in your Downloads folder",
+        image: "/images/tutorial/step6.png",
+    },
+    {
+        step: 7,
+        title: "Right-click and extract the ZIP file",
+        image: "/images/tutorial/step7.png",
+    },
+    {
+        step: 8,
+        title: "Open the extracted folder",
+        image: "/images/tutorial/step8.png",
+    },
+    {
+        step: 9,
+        title: "Run the game executable (.exe) and enjoy!",
+        image: "/images/tutorial/step9.png",
+    },
+];
 ---
 
-<Layout title="Download Tutorial">
-  <main class="tutorial-container">
-    <h1 class="page-title">Download Tutorial</h1>
-    <p class="page-subtitle">Follow these steps to download and play our games from Google Drive links.</p>
+<Layout title="Download Tutorial | Stefano Gaming">
+    <main class="tutorial-container">
+        <h1 class="tutorial-heading">Download Tutorial</h1>
 
-    <div class="steps-list">
-      <div class="step-card">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h2 class="step-title">Click the Download Link</h2>
-          <p class="step-description">Click on the download link for the game you want from the Games page. This will open the Google Drive file page.</p>
+        <div class="steps-list">
+            {
+                steps.map(({ step, title, image }) => (
+                    <div class="step-card">
+                        <div class="step-header">
+                            <span class="step-badge">{step}</span>
+                            <h2 class="step-title">
+                                Step {step} &mdash; {title}
+                            </h2>
+                        </div>
+                        <div class="step-image-wrapper">
+                            <img
+                                src={image}
+                                alt={`Step ${step}: ${title}`}
+                                class="step-image"
+                                loading="lazy"
+                            />
+                        </div>
+                    </div>
+                ))
+            }
         </div>
-      </div>
 
-      <div class="step-card">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h2 class="step-title">Open Google Drive</h2>
-          <p class="step-description">You will be taken to the Google Drive file viewer. You should see the game file listed there.</p>
+        <div class="note-box">
+            <p class="note-text">
+                <strong>Note:</strong> Some games are hosted on itch.io instead of
+                Google Drive. For those, click the link and use the Download button
+                on the itch.io page.
+            </p>
         </div>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h2 class="step-title">Click the Download Icon</h2>
-          <p class="step-description">Click the download icon (↓) at the top right of the Google Drive page to start downloading the file.</p>
-        </div>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h2 class="step-title">Extract the ZIP File</h2>
-          <p class="step-description">Once downloaded, locate the .zip file in your Downloads folder. Right-click and select 'Extract All...' (Windows) or double-click (Mac) to extract the contents.</p>
-        </div>
-      </div>
-
-      <div class="step-card">
-        <div class="step-number">5</div>
-        <div class="step-content">
-          <h2 class="step-title">Run the Game</h2>
-          <p class="step-description">Open the extracted folder and look for the game executable (.exe file). Double-click to run and enjoy!</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="note-card">
-      <span class="note-icon">ℹ️</span>
-      <p class="note-text"><strong>Note:</strong> Some games are hosted on itch.io instead of Google Drive. For those, click the link and use the Download button on the itch.io page.</p>
-    </div>
-  </main>
+    </main>
 </Layout>
 
 <style>
-  .tutorial-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
-
-  .page-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #e0e0e0;
-    margin-bottom: 0.5rem;
-  }
-
-  .page-subtitle {
-    font-size: 1.1rem;
-    color: #a0a0a0;
-    margin-bottom: 2.5rem;
-  }
-
-  .steps-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .step-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.25rem;
-    background-color: #1a1a1a;
-    border: 1px solid #2a2a2a;
-    border-radius: 12px;
-    padding: 1.5rem;
-    transition: border-color 0.2s ease;
-  }
-
-  .step-card:hover {
-    border-color: #7c5cfc;
-  }
-
-  .step-number {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    background-color: #7c5cfc;
-    color: #ffffff;
-    font-size: 1.25rem;
-    font-weight: 700;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .step-content {
-    flex: 1;
-  }
-
-  .step-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    color: #e0e0e0;
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-  }
-
-  .step-description {
-    font-size: 1rem;
-    color: #b0b0b0;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .note-card {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    background-color: #1a1a1a;
-    border: 1px solid #2a2a2a;
-    border-left: 4px solid #7c5cfc;
-    border-radius: 8px;
-    padding: 1.25rem;
-    margin-top: 2.5rem;
-  }
-
-  .note-icon {
-    font-size: 1.25rem;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-
-  .note-text {
-    font-size: 0.95rem;
-    color: #b0b0b0;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  .note-text strong {
-    color: #e0e0e0;
-  }
-
-  @media (max-width: 600px) {
-    .tutorial-container {
-      padding: 1.5rem 1rem;
+    :root {
+        --bg: #000000;
+        --card-bg: #0a0a0a;
+        --text: #ffffff;
+        --muted: #818181;
+        --primary: #3374ff;
+        --border: #222222;
     }
 
-    .page-title {
-      font-size: 2rem;
+    .tutorial-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        background-color: var(--bg);
+        color: var(--text);
+        font-family:
+            system-ui,
+            -apple-system,
+            sans-serif;
+    }
+
+    .tutorial-heading {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 2.5rem;
+        color: var(--text);
+    }
+
+    .steps-list {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
     }
 
     .step-card {
-      padding: 1.25rem;
-      gap: 1rem;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1.5rem;
+        transition:
+            transform 0.2s ease,
+            box-shadow 0.2s ease;
     }
 
-    .step-number {
-      width: 40px;
-      height: 40px;
-      font-size: 1.1rem;
+    .step-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(51, 116, 255, 0.1);
+    }
+
+    .step-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .step-badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        border-radius: 50%;
+        background-color: var(--primary);
+        color: var(--text);
+        font-weight: 700;
+        font-size: 1.1rem;
     }
 
     .step-title {
-      font-size: 1.1rem;
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--text);
+        margin: 0;
+        line-height: 1.4;
     }
 
-    .step-description {
-      font-size: 0.95rem;
+    .step-image-wrapper {
+        width: 100%;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
     }
-  }
+
+    .step-image {
+        display: block;
+        max-width: 100%;
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+    }
+
+    .note-box {
+        margin-top: 2.5rem;
+        padding: 1.25rem 1.5rem;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border);
+        border-left: 4px solid var(--primary);
+        border-radius: 8px;
+    }
+
+    .note-text {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .note-text strong {
+        color: var(--text);
+    }
+
+    @media (max-width: 768px) {
+        .tutorial-container {
+            padding: 1.5rem 0.75rem;
+        }
+
+        .tutorial-heading {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .step-card {
+            padding: 1.25rem;
+        }
+
+        .step-header {
+            gap: 0.75rem;
+        }
+
+        .step-badge {
+            width: 34px;
+            height: 34px;
+            min-width: 34px;
+            font-size: 1rem;
+        }
+
+        .step-title {
+            font-size: 1.05rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .tutorial-heading {
+            font-size: 1.6rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-card {
+            padding: 1rem;
+        }
+
+        .step-title {
+            font-size: 0.95rem;
+        }
+    }
 </style>
