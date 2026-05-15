@@ -21,24 +21,30 @@ const featuredGames = await getCollection(
         <div class="games__grid">
             {
                 featuredGames.map((game) => (
-                    <article class="card">
-                        {game.data.youtubeId ? (
-                            <div class="card__video">
-                                <iframe
-                                    src={`https://www.youtube.com/embed/${game.data.youtubeId}`}
-                                    title={`${game.data.title} Trailer`}
-                                    frameborder="0"
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                    allowfullscreen
-                                />
-                            </div>
-                        ) : (
+                    <article
+                        class="card"
+                        data-has-video={!!game.data.youtubeId}
+                    >
+                        <div class="card__media">
                             <img
                                 src={game.data.image}
                                 alt={game.data.title}
-                                class="card__image"
+                                class="card__media-img"
                             />
-                        )}
+                            {game.data.youtubeId && (
+                                <div
+                                    class="card__media-video"
+                                    data-src={`https://www.youtube.com/embed/${game.data.youtubeId}?autoplay=1&mute=1`}
+                                >
+                                    <iframe
+                                        title={`${game.data.title} Trailer`}
+                                        frameborder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowfullscreen
+                                    />
+                                </div>
+                            )}
+                        </div>
                         <h2 class="card__title">{game.data.title}</h2>
                         <a
                             href={game.data.url}
@@ -141,11 +147,42 @@ const featuredGames = await getCollection(
         border-color: var(--primary);
     }
 
-    .card__image {
+    .card__media {
+        position: relative;
         width: 100%;
-        max-height: 200px;
+        aspect-ratio: 16 / 9;
+        overflow: hidden;
+    }
+
+    .card__media-img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
         display: block;
+        transition: opacity 0.3s ease;
+    }
+
+    .card__media-video {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        pointer-events: none;
+    }
+
+    .card__media-video iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+    }
+
+    .card[data-has-video="true"]:hover .card__media-img {
+        opacity: 0;
+    }
+
+    .card[data-has-video="true"]:hover .card__media-video {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .card__title {
@@ -153,22 +190,6 @@ const featuredGames = await getCollection(
         font-size: 1.25rem;
         font-weight: 600;
         margin: 1rem 1rem 0.75rem;
-    }
-
-    .card__video {
-        position: relative;
-        width: 100%;
-        padding-bottom: 56.25%;
-        margin: 0 0 1rem;
-    }
-
-    .card__video iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border: none;
     }
 
     .card__link {
@@ -188,3 +209,20 @@ const featuredGames = await getCollection(
         opacity: 0.85;
     }
 </style>
+
+<script>
+    document
+        .querySelectorAll(".card[data-has-video='true']")
+        .forEach((card) => {
+            const videoDiv = card.querySelector(".card__media-video");
+            if (!videoDiv) return;
+            const iframe = videoDiv.querySelector("iframe");
+            if (!iframe) return;
+
+            card.addEventListener("mouseenter", () => {
+                if (!iframe.src) {
+                    iframe.src = videoDiv.dataset.src || "";
+                }
+            });
+        });
+</script>
