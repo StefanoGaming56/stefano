@@ -358,13 +358,15 @@ const { Content } = await render(about);
             });
         });
 
-    const avatar = document.querySelector(".about__avatar");
-    const aboutSection = document.querySelector(".about");
+    function initAvatarSticky() {
+        const avatar = document.querySelector(".about__avatar");
+        const aboutSection = document.querySelector(".about");
 
-    if (avatar && aboutSection) {
+        if (!avatar || !aboutSection) return;
+
         const placeholder = document.createElement("div");
 
-        window.addEventListener("scroll", () => {
+        function onScroll() {
             const rect = aboutSection.getBoundingClientRect();
             if (rect.bottom < window.innerHeight) {
                 if (!avatar.classList.contains("about__avatar--fixed")) {
@@ -386,6 +388,18 @@ const { Content } = await render(about);
                     placeholder.remove();
                 }
             }
-        });
+        }
+
+        window.addEventListener("scroll", onScroll);
+        document.addEventListener(
+            "astro:before-swap",
+            () => {
+                window.removeEventListener("scroll", onScroll);
+            },
+            { once: true },
+        );
     }
+
+    document.addEventListener("astro:page-load", initAvatarSticky);
+    initAvatarSticky();
 </script>
