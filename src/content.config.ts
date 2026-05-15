@@ -22,4 +22,11 @@ const tutorial = defineCollection({
   }),
 });
 
-export const collections = { games, tutorial };
+const about = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/data/about" }),
+  schema: z.object({
+    title: z.string(),
+  }),
+});
+
+export const collections = { games, tutorial, about };
