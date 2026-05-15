@@ -15,4 +15,13 @@ const games = defineCollection({
   }),
 });
 
-export const collections = { games };
+const tutorial = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/data/tutorial" }),
+  schema: z.object({
+    step: z.number(),
+    title: z.string(),
+    image: z.string(),
+  }),
+});
+
+export const collections = { games, tutorial };

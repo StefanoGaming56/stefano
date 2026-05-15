@@ -1,53 +1,9 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
 
-const steps = [
-    {
-        step: 1,
-        title: "Go to the Games page and click a download link",
-        image: "/images/tutorial/step1.png",
-    },
-    {
-        step: 2,
-        title: "You will be taken to Google Drive",
-        image: "/images/tutorial/step2.png",
-    },
-    {
-        step: 3,
-        title: "Click the download button on the Google Drive page",
-        image: "/images/tutorial/step3.png",
-    },
-    {
-        step: 4,
-        title: "Confirm the download if prompted",
-        image: "/images/tutorial/step4.png",
-    },
-    {
-        step: 5,
-        title: "Wait for the download to complete",
-        image: "/images/tutorial/step5.png",
-    },
-    {
-        step: 6,
-        title: "Locate the downloaded ZIP file in your Downloads folder",
-        image: "/images/tutorial/step6.png",
-    },
-    {
-        step: 7,
-        title: "Right-click and extract the ZIP file",
-        image: "/images/tutorial/step7.png",
-    },
-    {
-        step: 8,
-        title: "Open the extracted folder",
-        image: "/images/tutorial/step8.png",
-    },
-    {
-        step: 9,
-        title: "Run the game executable (.exe) and enjoy!",
-        image: "/images/tutorial/step9.png",
-    },
-];
+const steps = await getCollection("tutorial");
+steps.sort((a, b) => a.data.step - b.data.step);
 ---
 
 <Layout title="Download Tutorial | Stefano Gaming">
@@ -56,18 +12,18 @@ const steps = [
 
         <div class="steps-list">
             {
-                steps.map(({ step, title, image }) => (
+                steps.map(({ data }) => (
                     <div class="step-card">
                         <div class="step-header">
-                            <span class="step-badge">{step}</span>
+                            <span class="step-badge">{data.step}</span>
                             <h2 class="step-title">
-                                Step {step} &mdash; {title}
+                                Step {data.step} &mdash; {data.title}
                             </h2>
                         </div>
                         <div class="step-image-wrapper">
                             <img
-                                src={image}
-                                alt={`Step ${step}: ${title}`}
+                                src={data.image}
+                                alt={`Step ${data.step}: ${data.title}`}
                                 class="step-image"
                                 loading="lazy"
                             />
@@ -135,7 +91,7 @@ const steps = [
 
     .step-card:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(51, 116, 255, 0.1);
+        box-shadow: 0 8px 24px rgba(254, 44, 0, 0.1);
     }
 
     .step-header {
