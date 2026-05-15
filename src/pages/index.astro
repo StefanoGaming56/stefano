@@ -80,6 +80,16 @@ const featuredGames = await getCollection(
             </div>
         </div>
     </section>
+
+    <section class="callout">
+        <div class="callout__container">
+            <h2 class="callout__title">Want to see more?</h2>
+            <p class="callout__text">
+                Check out the full collection of games I've made.
+            </p>
+            <a href="/games" class="callout__button">Browse All Games</a>
+        </div>
+    </section>
 </Layout>
 
 <style is:global>
@@ -133,7 +143,7 @@ const featuredGames = await getCollection(
     }
 
     .about {
-        padding: 3rem 1.5rem;
+        padding: 3rem 1.5rem 0;
     }
 
     .about__container {
@@ -145,12 +155,17 @@ const featuredGames = await getCollection(
     }
 
     .about__avatar {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
+        width: 250px;
+        height: auto;
         object-fit: cover;
-        border: 3px solid var(--primary);
         flex-shrink: 0;
+        order: 2;
+        transition: none;
+    }
+
+    .about__avatar--fixed {
+        position: fixed;
+        z-index: 10;
     }
 
     .about__title {
@@ -181,6 +196,50 @@ const featuredGames = await getCollection(
             width: 120px;
             height: 120px;
         }
+    }
+
+    .callout {
+        padding: 3rem 1.5rem;
+        text-align: center;
+    }
+
+    .callout__container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 2.5rem 2rem;
+        background-color: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+    }
+
+    .callout__title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0 0 0.75rem;
+        color: var(--text);
+    }
+
+    .callout__text {
+        color: var(--muted);
+        font-size: 1rem;
+        margin: 0 0 1.5rem;
+        line-height: 1.6;
+    }
+
+    .callout__button {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        background-color: var(--primary);
+        color: var(--text);
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: opacity 0.2s ease;
+    }
+
+    .callout__button:hover {
+        opacity: 0.85;
     }
 
     .games {
@@ -299,4 +358,35 @@ const featuredGames = await getCollection(
                 iframe.src = "";
             });
         });
+
+    const avatar = document.querySelector(".about__avatar");
+    const aboutSection = document.querySelector(".about");
+
+    if (avatar && aboutSection) {
+        const placeholder = document.createElement("div");
+
+        window.addEventListener("scroll", () => {
+            const rect = aboutSection.getBoundingClientRect();
+            if (rect.bottom < window.innerHeight) {
+                if (!avatar.classList.contains("about__avatar--fixed")) {
+                    const avatarRect = avatar.getBoundingClientRect();
+                    placeholder.style.width = avatarRect.width + "px";
+                    placeholder.style.height = avatarRect.height + "px";
+                    placeholder.style.order = "2";
+                    placeholder.style.flexShrink = "0";
+                    avatar.parentNode.insertBefore(placeholder, avatar);
+                    avatar.style.top = avatarRect.top + "px";
+                    avatar.style.left = avatarRect.left + "px";
+                    avatar.classList.add("about__avatar--fixed");
+                }
+            } else {
+                if (avatar.classList.contains("about__avatar--fixed")) {
+                    avatar.classList.remove("about__avatar--fixed");
+                    avatar.style.top = "";
+                    avatar.style.left = "";
+                    placeholder.remove();
+                }
+            }
+        });
+    }
 </script>
