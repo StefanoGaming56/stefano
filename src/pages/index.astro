@@ -306,7 +306,9 @@ const { Content } = await render(about);
         height: 100%;
         object-fit: cover;
         display: block;
-        transition: opacity 0.3s ease;
+        transition:
+            opacity 0.3s ease,
+            transform 0.4s ease-out;
     }
 
     .card__media-video {

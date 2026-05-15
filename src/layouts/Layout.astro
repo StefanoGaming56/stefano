@@ -149,6 +149,45 @@ const currentPath = Astro.url.pathname;
             }
         </script>
 
+        <script>
+            function initCardTilt() {
+                const cards = document.querySelectorAll(".card, .game-card");
+
+                cards.forEach((card) => {
+                    const img =
+                        card.querySelector(".card__media-img") ||
+                        card.querySelector(".card-image");
+
+                    if (!img) return;
+
+                    card.addEventListener("mousemove", (e) => {
+                        const rect = card.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        const centerX = rect.width / 2;
+                        const centerY = rect.height / 2;
+
+                        // Movement range in pixels
+                        const maxMove = 12;
+
+                        const offsetX = ((x - centerX) / centerX) * maxMove;
+                        const offsetY = ((y - centerY) / centerY) * maxMove;
+
+                        img.style.transform = `translate(${offsetX}px, ${offsetY}px) scale(1.05)`;
+                        img.style.transition = "transform 0.1s ease-out";
+                    });
+
+                    card.addEventListener("mouseleave", () => {
+                        img.style.transform = "";
+                        img.style.transition = "transform 0.4s ease-out";
+                    });
+                });
+            }
+
+            document.addEventListener("astro:page-load", initCardTilt);
+            initCardTilt();
+        </script>
+
         <style is:global>
             *,
             *::before,

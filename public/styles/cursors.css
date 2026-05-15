@@ -25,3 +25,9 @@ summary,
         url("/images/cursors/hand.png") 0 0,
         pointer !important;
 }
+
+/* Red text selection highlight */
+::selection {
+    background-color: #fe2c00;
+    color: #ffffff;
+}
