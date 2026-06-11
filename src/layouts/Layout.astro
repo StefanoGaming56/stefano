@@ -128,25 +128,30 @@ const currentPath = Astro.url.pathname;
         </footer>
 
         <script>
-            const hamburger = document.getElementById("hamburger");
-            const mobileNav = document.getElementById("mobile-nav");
+            function initHamburger() {
+                const hamburger = document.getElementById("hamburger");
+                const mobileNav = document.getElementById("mobile-nav");
 
-            if (hamburger && mobileNav) {
-                hamburger.addEventListener("click", () => {
-                    const isOpen = mobileNav.classList.toggle("open");
-                    hamburger.classList.toggle("open");
-                    hamburger.setAttribute("aria-expanded", String(isOpen));
-                });
-
-                // Close mobile nav when a link is clicked
-                mobileNav.querySelectorAll("a").forEach((link) => {
-                    link.addEventListener("click", () => {
-                        mobileNav.classList.remove("open");
-                        hamburger.classList.remove("open");
-                        hamburger.setAttribute("aria-expanded", "false");
+                if (hamburger && mobileNav) {
+                    hamburger.addEventListener("click", () => {
+                        const isOpen = mobileNav.classList.toggle("open");
+                        hamburger.classList.toggle("open");
+                        hamburger.setAttribute("aria-expanded", String(isOpen));
                     });
-                });
+
+                    // Close mobile nav when a link is clicked
+                    mobileNav.querySelectorAll("a").forEach((link) => {
+                        link.addEventListener("click", () => {
+                            mobileNav.classList.remove("open");
+                            hamburger.classList.remove("open");
+                            hamburger.setAttribute("aria-expanded", "false");
+                        });
+                    });
+                }
             }
+
+            document.addEventListener("astro:page-load", initHamburger);
+            initHamburger();
         </script>
 
         <script>
